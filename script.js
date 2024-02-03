@@ -282,7 +282,7 @@ nextRoundButton.addEventListener("click", () => {
 
 playerXScore = 0;
 playerOScore = 0;
-var gameSign = ["O", "X"];
+var gameSign = ["X", "O"];
 var gameAreas = document.querySelectorAll(".area");
 var currentPlayer;
 var chosenLevel;
@@ -362,7 +362,7 @@ function startGameAi() {
     moveAI();
   } else {
     // rotates signs if human is first
-    gameSign = ["O", "X"];
+    gameSign = ["X", "O"];
     currentPlayer = "Human";
 
   }
