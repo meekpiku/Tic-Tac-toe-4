@@ -282,7 +282,7 @@ nextRoundButton.addEventListener("click", () => {
 
 playerXScore = 0;
 playerOScore = 0;
-var gameSign = ["X", "O"];
+var gameSign = ["O", "X"];
 var gameAreas = document.querySelectorAll(".area");
 var currentPlayer;
 var chosenLevel;
@@ -401,13 +401,14 @@ function nextPlayer() {
     }
   } else if (checkWinner() == gameSign[0]) {
     nextRoundButton.style.display = "inline";
-    playerXScore++;
-    document.querySelector("#results").innerHTML ="1 Point for Player X";
+    playerOScore++
+    document.querySelector("#results").innerHTML ="1 Point for Player O";
     // document.querySelector(".turn-status").innerHTML = "Computer Won";
   } else if (checkWinner() == gameSign[1]) {
     nextRoundButton.style.display = "inline";
-    playerOScore++
-    document.querySelector("#results").innerHTML ="1 Point for Player O";
+    
+    playerXScore++;
+    document.querySelector("#results").innerHTML ="1 Point for Player X";
     // document.querySelector(".turn-status").innerHTML = "You Won";
     currentPlayer = "";
   } else {
@@ -530,7 +531,7 @@ function equals5(n1, n2, n3, n4, n5) {
 function equals4(n1, n2, n3, n4) {
   return n1 == n2 && n2 == n3 && n3 ==n4 && n1 != "";
 }
-function equals3(n1, n2, n3, ) {
+function equals3(n1, n2, n3) {
   return n1 == n2 && n2 == n3 && n1 != "";
 }
 
@@ -665,7 +666,7 @@ function checkWinner() {
   if (
     equals5(gameTable[0][0], gameTable[1][1], gameTable[2][2], gameTable[3][3], gameTable[4][4])
   ) {
-    return gameTable[0][4];
+    return gameTable[0][0];
   }
   if (
     equals5(gameTable[0][1], gameTable[1][2],gameTable[2][3],gameTable[3][4],gameTable[4][5])
