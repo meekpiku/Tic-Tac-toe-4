@@ -17,9 +17,9 @@
         <footer id="footer">
             Made by: Jessee Daniel Catli, Mary Crissle Ruba, Richard Gabriel Amor, Micky Ileto, and Maine Cedric Tabirao
         </footer>
-        <div class="dropdown">
+        <div class="dropdown" >
             <button class="dropbtn">Play With AI</button>
-            <div class="difficulty-bar">
+            <div class="difficulty-bar" id="dropdown">
                 <div class="dropdown-content">
                     <button name="Easy" class="btn btn-success diff" id="easy">Easy</button>
                     <button name="Medium" class="btn btn-warning diff" id="medium">Medium</button>
@@ -27,8 +27,21 @@
                 </div>
             </div>
         </div>
+        <div class="wrapper">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+    </div>
     </div>
     <div id="game-screen" style="display: none;">
+        <button class="back-button" onclick="backbtn()">← </button>
         <div class="turn-container">
             <h3 >PLAYER TURN</h3>
             <div class="turn-box align" style="color: white;">X</div>
@@ -71,10 +84,16 @@
             <div class="main-box box align" id="28">28</div>
             <div class="main-box box align" id="29">29</div>
         </div>
-
+        <div id="popup" class="popup">
+            <div id="popup-content" class="popup-content"></div>
+            <button id="close-popup" class="close-popup" onclick="closePopup()">Close</button>
+          </div>
+          
     </div>
+
     
     <div id="game-screen2" style="display: none;">
+        <button class="back-button2" onclick="backbtn()">←</button>
         <div class="turn-container">
             <h3 id="player-turn">PLAYER TURN</h3>
             <div class="turn-box align" style="color: white;">X</div>
@@ -117,11 +136,15 @@
             <div class="box align area n29 field" ></div>
             <div class="box align area n30 field" ></div>
         </div>
-    
+        <div id="new-popup" class="new-popup">
+            <div id="new-popup-content" class="new-popup-content"></div>
+            <button id="close-new-popup" class="close-new-popup" onclick="closeNewPopup()">Close</button>
+        </div>
     </div>
     <h2 id="results"></h2>
     <button onclick="" id="play-again">Play Again</button>
     <button onclick="resetAiTable()" id="next-round">Next Round</button>
     <script src="script.js"></script>
+    
 </body>
 </html>

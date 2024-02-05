@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Hide Home Screen
         document.getElementById("home-screen").style.display = "none";
         document.getElementById("game-screen").style.display = "block";
+        start();
     });
 
     document.getElementById("easy").addEventListener("click", function () {
@@ -42,7 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let isGameOver = false;
     let boardClickable = true;
 
+function start(){
+    playerXScore = 0;
+      playerOScore = 0;
+
     boxes.forEach(e => {
+      e.style.color="white";
+      e.style.background="transparent";
         e.innerHTML = '';
         e.addEventListener("click", () => {
             if (!isGameOver && boardClickable && e.innerHTML === "") {
@@ -66,7 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Check if a player reached 5 points
                     if (playerXScore === 5 || playerOScore === 5) {
                         isGameOver = true;
-                        document.querySelector("#results").innerHTML = turn + " wins the game!";
+                        const message = "Player " + turn + " wins the game!";
+                        document.querySelector("#results").innerHTML = "Press for another match";
+                        openPopup(message);
                         playAgainButton.innerHTML = "Play Again";
                         playAgainButton.style.display = "inline";
                         nextRoundButton.style.display = "none";
@@ -80,6 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+  }
+
 
     function changeTurn() {
         if (turn === "X") {
@@ -375,16 +386,20 @@ function aiGameOver(){
 }
 //calls next player depending on who was previous player
 function nextPlayer() {
-   
   const nextRoundButton = document.getElementById("next-round");
+  
   if (playerXScore === 5) {
-    aiGameOver()
-    document.querySelector("#results").innerHTML ="PlayerX wins!";
+      aiGameOver();
+      showNewPopup("Player X wins!")
+      showPlayAgainButton();;
   }
+  
   if (playerOScore === 5) {
-    aiGameOver()
-    document.querySelector("#results").innerHTML ="PlayerO wins!";
+      aiGameOver();
+      showNewPopup("Player O wins!")
+      showPlayAgainButton();;
   }
+
   changeTurn();
   updateGameTable();
   if (checkWinner() == null) {
@@ -450,7 +465,7 @@ window.setTimeout(()=>{
       // AI will play 60% hard ans 40% easy
      let rnd = Math.floor(Math.random() * 101);
      
-     if(rnd <= 60){
+     if(rnd <= 40){
        hardAI();
      }
      else{
@@ -726,4 +741,75 @@ function getEmptyFields() {
   }
 
   return emptyFields;
+}
+
+function openPopup(content) {
+  const popup = document.getElementById("popup");
+  const popupContent = document.getElementById("popup-content");
+  popupContent.innerHTML = content;
+  popup.style.display = "block";
+}
+
+function closePopup() {
+  const popup = document.getElementById("popup");
+  popup.style.display = "none";
+}
+
+
+function backbtn() {
+    // Check which screen is currently displayed and hide it
+    var gameScreen = document.getElementById('game-screen');
+    var gameScreen2 = document.getElementById('game-screen2');
+    var homeScreen = document.getElementById('home-screen');
+    var dropDown = document.getElementById('dropdown');
+
+    if (gameScreen.style.display !== 'none') {
+      
+      document.getElementById("player-x-score").innerHTML = "X: " + playerXScore;
+      document.getElementById("player-o-score").innerHTML = "O: " + playerOScore;
+      gameScreen.style.display = 'none';
+    }
+
+    if (gameScreen2.style.display !== 'none') {
+        gameScreen2.style.display = 'none';
+        chosenLevel='';
+        playerXScore = 0;
+        playerOScore = 0;
+        gameAreas.forEach((e)=>{
+          e.innerText='';
+        })
+    }
+
+    dropDown.style.display = 'block';
+    homeScreen.style.display = 'block';
+}
+
+function showPopup(message) {
+  const popup = document.querySelector('.popup');
+  const popupContent = document.querySelector('.popup-content');
+  popupContent.innerHTML = message;
+  popup.style.display = 'block';
+}
+
+
+function showNewPopup(message) {
+  openNewPopup(message);
+}
+
+function openNewPopup(content) {
+  const newPopup = document.getElementById("new-popup");
+  const newPopupContent = document.getElementById("new-popup-content");
+  newPopupContent.innerHTML = content;
+  newPopup.style.display = "block";
+}
+
+function closeNewPopup() {
+  const newPopup = document.getElementById("new-popup");
+  newPopup.style.display = "none";
+}
+
+function showPlayAgainButton() {
+  const playAgainButton = document.getElementById("play-again");
+  playAgainButton.innerHTML = "Play Again";
+  playAgainButton.style.display = "inline";
 }
